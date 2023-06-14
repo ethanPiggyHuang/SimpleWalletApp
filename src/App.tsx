@@ -1,13 +1,11 @@
-import { AccountInfo } from './featrue/AccountInfo';
 import styled, { createGlobalStyle } from 'styled-components';
-import { Transactions } from './featrue/Transactions';
+import { Main } from './featrue/Main';
 
 function App() {
   return (
     <Wrapper>
       <GlobalStyle />
-      <AccountInfo />
-      <Transactions />
+      <Main />
     </Wrapper>
   );
 }

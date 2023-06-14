@@ -40,8 +40,7 @@ export const AccountInfo: React.FC = () => {
 type WrapperProps = {};
 
 const Wrapper = styled.div<WrapperProps>`
-  margin: auto;
-  width: 774px;
+  width: 100%;
   border: 1px solid black;
 `;
 

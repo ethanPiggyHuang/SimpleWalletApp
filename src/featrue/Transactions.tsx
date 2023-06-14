@@ -20,7 +20,6 @@ export const Transactions: React.FC = () => {
 
       Promise.allSettled([promise1, promise2]).then((results) => {
         results.forEach((result, index) => {
-          console.log(index, result.status);
           if (result.status === 'fulfilled') {
             const object = {} as { [index: string]: TransactionInfo };
             object[`${index}`] = result.value;
@@ -68,8 +67,7 @@ export const Transactions: React.FC = () => {
 type WrapperProps = {};
 
 const Wrapper = styled.div<WrapperProps>`
-  margin: auto;
-  width: 774px;
+  width: 100%;
   border: 1px solid black;
 `;
 
