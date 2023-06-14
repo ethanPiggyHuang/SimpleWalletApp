@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
-import Web3 from 'web3';
+import web3Api from '../utils/web3';
 
-export const AccountInfo: React.FC = () => {
-  const title = 'Account Info';
-  const address = '0x33b8287511ac7F003902e83D642Be4603afCd876';
+interface Props {
+  address: string;
+}
+
+export const AccountInfo: React.FC<Props> = ({ address }) => {
   const [ethBalance, setEthBalance] = useState('');
-  const web3 = new Web3(
-    `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_APIKEY}`
-  );
 
   useEffect(() => {
-    async function getBalance() {
-      web3.eth.getBalance(address).then((response) => {
-        const balanceInEther = web3.utils.fromWei(response, 'ether');
-        setEthBalance(balanceInEther);
-      });
+    async function fetchBalance() {
+      const response = await web3Api.getBalance(address);
+      setEthBalance(response);
     }
-    getBalance();
-  }, []);
+    fetchBalance();
+  }, [address]);
 
   return (
     <Wrapper>
-      <SectionTitle>{title}</SectionTitle>
+      <SectionTitle>Account Info</SectionTitle>
       <div>
         <InfoLine>
           <span>Account Address</span>
