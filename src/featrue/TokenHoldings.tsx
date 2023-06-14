@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components/macro';
 import web3Api from '../utils/web3';
+import { Template } from '../components/Template';
 
 interface Props {
   address: string;
@@ -24,36 +24,15 @@ export const TokenHoldings: React.FC<Props> = ({ address, tokenInfos }) => {
     fetchTokenHoldings();
   }, [address, tokenInfos]);
 
-  return (
-    <Wrapper>
-      <SectionTitle>Token Holdings</SectionTitle>
-      {tokenInfos.map((tokenInfo, index) => (
-        <div key={tokenInfo.token}>
-          <InfoLine>
-            <span>{`${tokenInfo.token} Balance`}</span>
-            <span>
-              {balances[index] && `${balances[index]} ${tokenInfo.token}`}
-            </span>
-          </InfoLine>
-        </div>
-      ))}
-    </Wrapper>
-  );
+  const renderProps = {
+    title: 'Token Holdings',
+    datas: tokenInfos.map((tokenInfo, index) => {
+      return {
+        name: `${tokenInfo.token} Balance`,
+        value: `${balances[index] ?? ''} ${tokenInfo.token}`,
+      };
+    }),
+  };
+
+  return <Template props={renderProps} />;
 };
-
-type WrapperProps = {};
-
-const Wrapper = styled.div<WrapperProps>`
-  width: 100%;
-  border: 1px solid black;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 20px;
-  text-align: left;
-`;
-
-const InfoLine = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

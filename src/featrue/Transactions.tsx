@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import { TransactionInfo } from 'web3';
 import web3Api from '../utils/web3';
+import { shortenText } from '../utils/common';
+import { Template } from '../components/Template';
 
 interface Props {
   transactionHashs: string[];
@@ -20,34 +22,59 @@ export const Transactions: React.FC<Props> = ({ transactionHashs }) => {
     fetchBalance();
   }, [transactionHashs]);
 
+  const renderProps = {
+    title: 'Transactions',
+    datas: transactionHashs.map((transactionHash, index) => {
+      return {
+        name: shortenText(transactionHash),
+        value:
+          transactionInfos[index.toString()]?.blockNumber?.toString() ?? '',
+      };
+    }),
+    subtitles: ['TX Hash', 'Block'],
+    subDatas: transactionHashs.map((_, index) => {
+      return [
+        {
+          name: 'from: ',
+          value: transactionInfos[index.toString()]?.from ?? '',
+        },
+        {
+          name: 'to: ',
+          value: transactionInfos[index.toString()]?.to ?? '',
+        },
+      ];
+    }),
+  };
+
   return (
-    <Wrapper>
-      <SectionTitle>Transactions</SectionTitle>
-      {transactionHashs.map((transactionHash, index) => (
-        <div key={transactionHash}>
-          <InfoLine>
-            <span>TX Hash</span>
-            <span>{transactionHash}</span>
-          </InfoLine>
-          <InfoLine>
-            <span>Block</span>
-            <span>
-              {transactionInfos[index.toString()]?.blockNumber
-                ? Number(transactionInfos[index.toString()]?.blockNumber)
-                : ''}
-            </span>
-          </InfoLine>
-          <InfoLine>
-            <span>From</span>
-            <span>{transactionInfos[index.toString()]?.from}</span>
-          </InfoLine>
-          <InfoLine>
-            <span>To</span>
-            <span>{transactionInfos[index.toString()]?.to}</span>
-          </InfoLine>
-        </div>
-      ))}
-    </Wrapper>
+    <Template props={renderProps} />
+    // <Wrapper>
+    //   <SectionTitle>Transactions</SectionTitle>
+    //   {transactionHashs.map((transactionHash, index) => (
+    //     <div key={transactionHash}>
+    //       <InfoLine>
+    //         <span>TX Hash</span>
+    //         <span>{shortenText(transactionHash)}</span>
+    //       </InfoLine>
+    //       <InfoLine>
+    //         <span>Block</span>
+    //         <span>
+    //           {transactionInfos[index.toString()]?.blockNumber
+    //             ? Number(transactionInfos[index.toString()]?.blockNumber)
+    //             : ''}
+    //         </span>
+    //       </InfoLine>
+    //       <InfoLine>
+    //         <span>From</span>
+    //         <span>{transactionInfos[index.toString()]?.from}</span>
+    //       </InfoLine>
+    //       <InfoLine>
+    //         <span>To</span>
+    //         <span>{transactionInfos[index.toString()]?.to}</span>
+    //       </InfoLine>
+    //     </div>
+    //   ))}
+    // </Wrapper>
   );
 };
 

@@ -1,16 +1,10 @@
 import Web3, { TransactionInfo } from 'web3';
 import { contractABI } from './contractABI';
+import { addDecimalPoint } from './common';
 
 const web3 = new Web3(
   `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_APIKEY}`
 );
-
-const addDecimalPoint = (rawNumber: bigint, decimal: bigint) => {
-  const numberString = rawNumber?.toString();
-  const numberArray = Array.from(numberString);
-  numberArray.splice(numberArray.length - Number(decimal), 0, '.');
-  return numberArray.join('');
-};
 
 const web3Api = {
   async getBalance(address: string) {

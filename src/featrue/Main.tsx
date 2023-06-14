@@ -34,5 +34,5 @@ type WrapperProps = {};
 const Wrapper = styled.div<WrapperProps>`
   margin: auto;
   width: 774px;
-  border: 1px solid black;
+  padding: 5px 0 112px;
 `;
