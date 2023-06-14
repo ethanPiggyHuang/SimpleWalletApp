@@ -24,12 +24,11 @@ export const TokenHoldings: React.FC = () => {
         usdtContractAddress
       );
 
+      // @ts-ignore
       const usdcBalance = await usdcContract.methods.balanceOf(address).call();
+      // @ts-ignore
       const usdtBalance = await usdtContract.methods.balanceOf(address).call();
       const contractDecimals = await usdcContract.methods.decimals().call();
-
-      // console.log(`USDC Balance: ${usdcBalance}`);
-      // console.log(`USDT Balance: ${usdtBalance}`);
 
       const usdcBalanceString = usdcBalance?.toString();
       if (usdcBalanceString) {
