@@ -1,18 +1,20 @@
-import React from 'react';
-import './App.css';
 import { AccountInfo } from './featrue/AccountInfo';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { Transactions } from './featrue/Transactions';
 
 function App() {
   return (
-    <div className="App">
+    <Wrapper>
       <GlobalStyle />
       <AccountInfo />
-    </div>
+      <Transactions />
+    </Wrapper>
   );
 }
 
 export default App;
+
+const Wrapper = styled.div``;
 
 const GlobalStyle = createGlobalStyle`
   * {
