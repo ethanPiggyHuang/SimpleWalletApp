@@ -96,6 +96,7 @@ const DataRow = styled.div`
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 18px;
+  gap: 6px;
 
   &:last-child {
     margin-bottom: 0;
@@ -131,4 +132,8 @@ const SubDataText = styled.h3`
   line-height: 18px;
   display: inline-flex;
   align-items: center;
+
+  &:first-child {
+    margin-right: 6px;
+  }
 `;
