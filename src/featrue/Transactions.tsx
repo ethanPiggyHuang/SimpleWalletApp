@@ -34,11 +34,11 @@ export const Transactions: React.FC<Props> = ({ transactionHashs }) => {
     subDatas: transactionHashs.map((_, index) => {
       return [
         {
-          name: 'from: ',
+          name: 'from:',
           value: transactionInfos[index.toString()]?.from ?? '',
         },
         {
-          name: 'to: ',
+          name: 'to:',
           value: transactionInfos[index.toString()]?.to ?? '',
         },
       ];

@@ -39,11 +39,11 @@ export const Template: React.FC<Props> = (props) => {
                   <DivisionLine />
                   {subDatas[index].map((subData) => (
                     <SubDataRow>
-                      <SubDataText>{subData.name}</SubDataText>
+                      <SubDataText>{`${subData.name} `}</SubDataText>
                       {subData.value === '' ? (
                         <Skeleton isBlock={false} />
                       ) : (
-                        <SubDataText>{subData.value}</SubDataText>
+                        <SubDataText>{` ${subData.value}`}</SubDataText>
                       )}
                     </SubDataRow>
                   ))}
@@ -79,15 +79,17 @@ const Subtitle = styled.h2`
 `;
 
 const SectionData = styled.div`
-  width: 774px;
   padding: 44px 34px;
   background-color: #f2f5f7;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width: 500px) {
+    padding: 24px 14px;
+  }
 `;
 
 const DataRow = styled.div`
-  padding: 0 46px 0 32px;
+  padding: 40px 46px 40px 32px;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -98,30 +100,35 @@ const DataRow = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 10px 16px 10px 6px;
+  }
 `;
 
 const DataText = styled.h2`
-  height: 22px;
-  margin: 44px 0;
+  height: 30px;
+  display: flex;
+  align-items: center;
 `;
 
 const DivisionLine = styled.div`
   width: 100%;
   height: 3px;
   background-color: #c3cfd9;
-  transform: translateY(-17px);
+  margin: 24px 0 4px;
 `;
 
 const SubDataRow = styled.div`
   width: 100%;
-  padding: 4px 0 16px;
-
-  &:last-child {
-    padding-bottom: 40px;
+  padding-top: 25px;
+  @media screen and (max-width: 500px) {
+    padding-top: 10px;
   }
 `;
 
 const SubDataText = styled.h3`
-  display: inline;
   line-height: 18px;
+  display: inline-flex;
+  align-items: center;
 `;

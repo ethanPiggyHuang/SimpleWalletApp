@@ -35,4 +35,12 @@ const Wrapper = styled.div<WrapperProps>`
   margin: auto;
   width: 774px;
   padding: 5px 0 112px;
+  @media screen and (max-width: 874px) and (min-width: 500px) {
+    width: 100vw;
+    padding: 5px 50px 112px;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100vw;
+    padding: 5px 20px 112px;
+  }
 `;
