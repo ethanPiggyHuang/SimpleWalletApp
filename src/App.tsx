@@ -20,6 +20,8 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Familjen Grotesk', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     margin: 0;
     padding: 0;
