@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { Skeleton } from './Skeleton';
+import { saveToClipboard } from '../utils/common';
 
 interface Props {
   props: {
     title: string;
-    datas: { name: string; value: string; unit?: string }[];
+    datas: {
+      name: string;
+      value: string;
+      unit?: string;
+      expandedName?: string;
+      expandedValue?: string;
+    }[];
     subtitles?: string[];
     subDatas?: { name: string; value: string }[][];
   };
@@ -20,37 +27,48 @@ export const Template: React.FC<Props> = (props) => {
         {subtitles && (
           <Subtitles>
             {subtitles.map((subtitle) => (
-              <Subtitle>{subtitle}</Subtitle>
+              <Subtitle key={subtitle}>{subtitle}</Subtitle>
             ))}
           </Subtitles>
         )}
         {datas.map((data, index) => (
-          <>
-            <DataRow key={data.name}>
-              <DataText>{data.name}</DataText>
-              {data.value === '' ? (
-                <Skeleton isBlock={true} />
-              ) : (
-                <DataText>{data.value + (data.unit ?? '')}</DataText>
-              )}
-
-              {subDatas && (
-                <>
-                  <DivisionLine />
-                  {subDatas[index].map((subData) => (
-                    <SubDataRow>
-                      <SubDataText>{`${subData.name} `}</SubDataText>
-                      {subData.value === '' ? (
-                        <Skeleton isBlock={false} />
-                      ) : (
-                        <SubDataText>{` ${subData.value}`}</SubDataText>
-                      )}
-                    </SubDataRow>
-                  ))}
-                </>
-              )}
-            </DataRow>
-          </>
+          <DataRow key={data.name}>
+            <DataText
+              expandData={data?.expandedName}
+              onClick={() =>
+                data?.expandedName && saveToClipboard(data?.expandedName)
+              }
+            >
+              {data.name}
+            </DataText>
+            {data.value === '' ? (
+              <Skeleton isBlock={true} />
+            ) : (
+              <DataText
+                expandData={data?.expandedValue}
+                onClick={() =>
+                  data?.expandedValue && saveToClipboard(data?.expandedValue)
+                }
+              >
+                {data.value + (data.unit ?? '')}
+              </DataText>
+            )}
+            {subDatas && (
+              <>
+                <DivisionLine />
+                {subDatas[index].map((subData, index) => (
+                  <SubDataRow key={index}>
+                    <SubDataText>{`${subData.name} `}</SubDataText>
+                    {subData.value === '' ? (
+                      <Skeleton isBlock={false} />
+                    ) : (
+                      <SubDataText>{` ${subData.value}`}</SubDataText>
+                    )}
+                  </SubDataRow>
+                ))}
+              </>
+            )}
+          </DataRow>
         ))}
       </SectionData>
     </Wrapper>
@@ -97,6 +115,7 @@ const DataRow = styled.div`
   align-items: center;
   margin-bottom: 18px;
   gap: 6px;
+  position: relative;
 
   &:last-child {
     margin-bottom: 0;
@@ -107,10 +126,39 @@ const DataRow = styled.div`
   }
 `;
 
-const DataText = styled.h2`
+interface DataTextProps {
+  expandData: string | undefined;
+}
+
+const DataText = styled.h2<DataTextProps>`
   height: 30px;
   display: flex;
   align-items: center;
+  position: relative;
+
+  &:hover::before {
+    content: ${({ expandData }) => `"${expandData}"`};
+    border: 2px #f2f5f7 solid;
+    position: absolute;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    font-size: 0.6em;
+    word-break: keep-all;
+    max-width: calc(100vw - 162px);
+    z-index: ${({ expandData }) => (expandData ? '2' : '-2')};
+    cursor: pointer;
+  }
+  &:last-child:hover::before {
+    right: 0;
+    text-align: right;
+  }
+
+  @media screen and (max-width: 752px) {
+    &:hover::before {
+      width: calc(100vw - 268px);
+      word-break: break-all;
+    }
+  }
 `;
 
 const DivisionLine = styled.div`

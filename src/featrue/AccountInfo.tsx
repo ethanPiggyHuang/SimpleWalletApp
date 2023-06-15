@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import web3Api from '../utils/web3';
 import { shortenText } from '../utils/common';
 import { Template } from '../components/Template';
@@ -21,7 +21,11 @@ export const AccountInfo: React.FC<Props> = ({ address }) => {
   const renderProps = {
     title: 'Account Info',
     datas: [
-      { name: 'Account Address', value: shortenText(address) },
+      {
+        name: 'Account Address',
+        value: shortenText(address),
+        expandedValue: address,
+      },
       { name: 'ETH Balance', value: ethBalance, unit: ' ETH' },
     ],
   };

@@ -20,3 +20,14 @@ export const addDecimalPoint = (rawNumber: bigint, decimal: bigint) => {
   numberArray.splice(numberArray.length - Number(decimal), 0, '.');
   return numberArray.join('');
 };
+
+export const saveToClipboard = (text: string) => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      alert('文字已保存到剪貼簿');
+    })
+    .catch((error) => {
+      alert(`無法保存文字到剪貼簿: ${error}`);
+    });
+};

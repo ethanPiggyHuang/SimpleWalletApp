@@ -20,9 +20,12 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: 'Familjen Grotesk', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-weight: 400;
     margin: 0;
     padding: 0;
+    color: #293845;
   }
   h1 {
     font-size: 26px;
@@ -37,8 +40,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     line-height: 1em;
     display: block;
-    color: #293845;
+    
     word-break: break-all;
+    cursor: default;
   }
   
   #root {
