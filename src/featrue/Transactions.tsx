@@ -26,6 +26,7 @@ export const Transactions: React.FC<Props> = ({ transactionHashs }) => {
     datas: transactionHashs.map((transactionHash, index) => {
       return {
         name: shortenText(transactionHash),
+        expandedName: transactionHash,
         value:
           transactionInfos[index.toString()]?.blockNumber?.toString() ?? '',
       };

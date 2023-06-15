@@ -5,7 +5,6 @@ function App() {
   return (
     <Wrapper>
       <GlobalStyle />
-      {/* <p>fff</p> */}
       <Main />
     </Wrapper>
   );
@@ -24,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     margin: 0;
     padding: 0;
+    color: #293845;
   }
   h1 {
     font-size: 26px;
@@ -38,8 +38,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     line-height: 1em;
     display: block;
-    color: #293845;
+    
     word-break: break-all;
+    cursor: default;
   }
   
   #root {
