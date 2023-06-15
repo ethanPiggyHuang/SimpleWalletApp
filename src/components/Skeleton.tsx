@@ -18,5 +18,6 @@ const Wrapper = styled.div<WrapperProps>`
   height: 16px;
   border-radius: 5px;
   background: lightgray;
+  margin-left: 6px;
   display: ${({ $isBlock }) => ($isBlock ? 'block' : 'inline-block')};
 `;
