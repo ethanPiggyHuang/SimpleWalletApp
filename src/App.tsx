@@ -67,5 +67,16 @@ const GlobalStyle = createGlobalStyle`
         font-size: 14px;
       }
     }
+    @media screen and (max-width: 400px) {
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 14px;
+      }
+      h3 {
+        font-size: 12px;
+      }
+    }
   }
 `;
