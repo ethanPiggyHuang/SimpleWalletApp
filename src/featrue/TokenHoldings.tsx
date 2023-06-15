@@ -29,7 +29,8 @@ export const TokenHoldings: React.FC<Props> = ({ address, tokenInfos }) => {
     datas: tokenInfos.map((tokenInfo, index) => {
       return {
         name: `${tokenInfo.token} Balance`,
-        value: `${balances[index] ?? ''} ${tokenInfo.token}`,
+        value: `${balances[index] ?? ''}`,
+        unit: ` ${tokenInfo.token}`,
       };
     }),
   };

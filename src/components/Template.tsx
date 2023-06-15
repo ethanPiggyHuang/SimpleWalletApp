@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Skeleton } from './Skeleton';
 
 interface Props {
   props: {
     title: string;
-    datas: { name: string; value: string }[];
+    datas: { name: string; value: string; unit?: string }[];
     subtitles?: string[];
     subDatas?: { name: string; value: string }[][];
   };
@@ -27,14 +28,23 @@ export const Template: React.FC<Props> = (props) => {
           <>
             <DataRow key={data.name}>
               <DataText>{data.name}</DataText>
-              <DataText>{data.value}</DataText>
+              {data.value === '' ? (
+                <Skeleton isBlock={true} />
+              ) : (
+                <DataText>{data.value + (data.unit ?? '')}</DataText>
+              )}
+
               {subDatas && (
                 <>
                   <DivisionLine />
                   {subDatas[index].map((subData) => (
                     <SubDataRow>
                       <SubDataText>{subData.name}</SubDataText>
-                      <SubDataText>{subData.value}</SubDataText>
+                      {subData.value === '' ? (
+                        <Skeleton isBlock={false} />
+                      ) : (
+                        <SubDataText>{subData.value}</SubDataText>
+                      )}
                     </SubDataRow>
                   ))}
                 </>

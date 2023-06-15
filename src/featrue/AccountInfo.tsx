@@ -22,7 +22,7 @@ export const AccountInfo: React.FC<Props> = ({ address }) => {
     title: 'Account Info',
     datas: [
       { name: 'Account Address', value: shortenText(address) },
-      { name: 'ETH Balance', value: `${ethBalance} ETH` },
+      { name: 'ETH Balance', value: ethBalance, unit: ' ETH' },
     ],
   };
 
