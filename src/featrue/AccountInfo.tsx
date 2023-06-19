@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import web3Api from '../utils/web3';
 import { shortenText } from '../utils/common';
 import { Template } from '../components/Template';
